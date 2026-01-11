@@ -134,6 +134,10 @@ function P.tabs()
     P.pick("tabs", tabs)
 end
 
+function P.problem_list(...)
+    P.pick("problem-list", ...)
+end
+
 function P.hidden_field(text, deli)
     return text:match(("([^%s]+)$"):format(deli))
 end

@@ -1,0 +1,379 @@
+---@class lc.ProblemListEntry
+---@field title_slug string
+---@field tags string[]
+
+---@class lc.ProblemList
+---@field name string
+---@field problems lc.ProblemListEntry[]
+
+---@class lc.ProblemLists
+local M = {}
+
+M.lists = {
+    blind75 = {
+        name = "Blind 75",
+        problems = {
+            -- Arrays & Hashing
+            { title_slug = "two-sum", tags = { "Arrays & Hashing" } },
+            { title_slug = "contains-duplicate", tags = { "Arrays & Hashing" } },
+            { title_slug = "valid-anagram", tags = { "Arrays & Hashing" } },
+            { title_slug = "group-anagrams", tags = { "Arrays & Hashing" } },
+            { title_slug = "top-k-frequent-elements", tags = { "Arrays & Hashing" } },
+            { title_slug = "product-of-array-except-self", tags = { "Arrays & Hashing" } },
+            { title_slug = "longest-consecutive-sequence", tags = { "Arrays & Hashing" } },
+
+            -- Two Pointers
+            { title_slug = "valid-palindrome", tags = { "Two Pointers" } },
+            { title_slug = "3sum", tags = { "Two Pointers" } },
+            { title_slug = "container-with-most-water", tags = { "Two Pointers" } },
+
+            -- Sliding Window
+            { title_slug = "best-time-to-buy-and-sell-stock", tags = { "Sliding Window" } },
+            { title_slug = "longest-substring-without-repeating-characters", tags = { "Sliding Window" } },
+            { title_slug = "longest-repeating-character-replacement", tags = { "Sliding Window" } },
+            { title_slug = "minimum-window-substring", tags = { "Sliding Window" } },
+
+            -- Stack
+            { title_slug = "valid-parentheses", tags = { "Stack" } },
+
+            -- Binary Search
+            { title_slug = "find-minimum-in-rotated-sorted-array", tags = { "Binary Search" } },
+            { title_slug = "search-in-rotated-sorted-array", tags = { "Binary Search" } },
+
+            -- Linked List
+            { title_slug = "reverse-linked-list", tags = { "Linked List" } },
+            { title_slug = "merge-two-sorted-lists", tags = { "Linked List" } },
+            { title_slug = "reorder-list", tags = { "Linked List" } },
+            { title_slug = "remove-nth-node-from-end-of-list", tags = { "Linked List" } },
+            { title_slug = "linked-list-cycle", tags = { "Linked List" } },
+            { title_slug = "merge-k-sorted-lists", tags = { "Linked List" } },
+
+            -- Trees
+            { title_slug = "invert-binary-tree", tags = { "Trees" } },
+            { title_slug = "maximum-depth-of-binary-tree", tags = { "Trees" } },
+            { title_slug = "same-tree", tags = { "Trees" } },
+            { title_slug = "subtree-of-another-tree", tags = { "Trees" } },
+            { title_slug = "lowest-common-ancestor-of-a-binary-search-tree", tags = { "Trees" } },
+            { title_slug = "binary-tree-level-order-traversal", tags = { "Trees" } },
+            { title_slug = "validate-binary-search-tree", tags = { "Trees" } },
+            { title_slug = "kth-smallest-element-in-a-bst", tags = { "Trees" } },
+            { title_slug = "construct-binary-tree-from-preorder-and-inorder-traversal", tags = { "Trees" } },
+            { title_slug = "binary-tree-maximum-path-sum", tags = { "Trees" } },
+            { title_slug = "serialize-and-deserialize-binary-tree", tags = { "Trees" } },
+
+            -- Tries
+            { title_slug = "implement-trie-prefix-tree", tags = { "Tries" } },
+            { title_slug = "design-add-and-search-words-data-structure", tags = { "Tries" } },
+            { title_slug = "word-search-ii", tags = { "Tries" } },
+
+            -- Heap / Priority Queue
+            { title_slug = "find-median-from-data-stream", tags = { "Heap / Priority Queue" } },
+
+            -- Backtracking
+            { title_slug = "combination-sum", tags = { "Backtracking" } },
+            { title_slug = "word-search", tags = { "Backtracking" } },
+
+            -- Graphs
+            { title_slug = "number-of-islands", tags = { "Graphs" } },
+            { title_slug = "clone-graph", tags = { "Graphs" } },
+            { title_slug = "pacific-atlantic-water-flow", tags = { "Graphs" } },
+            { title_slug = "course-schedule", tags = { "Graphs" } },
+            { title_slug = "graph-valid-tree", tags = { "Graphs" } },
+            { title_slug = "number-of-connected-components-in-an-undirected-graph", tags = { "Graphs" } },
+
+            -- Advanced Graphs
+            { title_slug = "alien-dictionary", tags = { "Advanced Graphs" } },
+
+            -- 1-D Dynamic Programming
+            { title_slug = "climbing-stairs", tags = { "1-D DP" } },
+            { title_slug = "house-robber", tags = { "1-D DP" } },
+            { title_slug = "house-robber-ii", tags = { "1-D DP" } },
+            { title_slug = "longest-palindromic-substring", tags = { "1-D DP" } },
+            { title_slug = "palindromic-substrings", tags = { "1-D DP" } },
+            { title_slug = "decode-ways", tags = { "1-D DP" } },
+            { title_slug = "coin-change", tags = { "1-D DP" } },
+            { title_slug = "maximum-product-subarray", tags = { "1-D DP" } },
+            { title_slug = "word-break", tags = { "1-D DP" } },
+            { title_slug = "longest-increasing-subsequence", tags = { "1-D DP" } },
+
+            -- 2-D Dynamic Programming
+            { title_slug = "unique-paths", tags = { "2-D DP" } },
+            { title_slug = "longest-common-subsequence", tags = { "2-D DP" } },
+
+            -- Greedy
+            { title_slug = "maximum-subarray", tags = { "Greedy" } },
+            { title_slug = "jump-game", tags = { "Greedy" } },
+
+            -- Intervals
+            { title_slug = "insert-interval", tags = { "Intervals" } },
+            { title_slug = "merge-intervals", tags = { "Intervals" } },
+            { title_slug = "non-overlapping-intervals", tags = { "Intervals" } },
+            { title_slug = "meeting-rooms", tags = { "Intervals" } },
+            { title_slug = "meeting-rooms-ii", tags = { "Intervals" } },
+
+            -- Math & Geometry
+            { title_slug = "rotate-image", tags = { "Math & Geometry" } },
+            { title_slug = "spiral-matrix", tags = { "Math & Geometry" } },
+            { title_slug = "set-matrix-zeroes", tags = { "Math & Geometry" } },
+
+            -- Bit Manipulation
+            { title_slug = "number-of-1-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "counting-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "reverse-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "missing-number", tags = { "Bit Manipulation" } },
+            { title_slug = "sum-of-two-integers", tags = { "Bit Manipulation" } },
+        },
+    },
+
+    neetcode150 = {
+        name = "NeetCode 150",
+        problems = {
+            -- Arrays & Hashing
+            { title_slug = "two-sum", tags = { "Arrays & Hashing" } },
+            { title_slug = "contains-duplicate", tags = { "Arrays & Hashing" } },
+            { title_slug = "valid-anagram", tags = { "Arrays & Hashing" } },
+            { title_slug = "group-anagrams", tags = { "Arrays & Hashing" } },
+            { title_slug = "top-k-frequent-elements", tags = { "Arrays & Hashing" } },
+            { title_slug = "encode-and-decode-strings", tags = { "Arrays & Hashing" } },
+            { title_slug = "product-of-array-except-self", tags = { "Arrays & Hashing" } },
+            { title_slug = "valid-sudoku", tags = { "Arrays & Hashing" } },
+            { title_slug = "longest-consecutive-sequence", tags = { "Arrays & Hashing" } },
+
+            -- Two Pointers
+            { title_slug = "valid-palindrome", tags = { "Two Pointers" } },
+            { title_slug = "two-sum-ii-input-array-is-sorted", tags = { "Two Pointers" } },
+            { title_slug = "3sum", tags = { "Two Pointers" } },
+            { title_slug = "container-with-most-water", tags = { "Two Pointers" } },
+            { title_slug = "trapping-rain-water", tags = { "Two Pointers" } },
+
+            -- Sliding Window
+            { title_slug = "best-time-to-buy-and-sell-stock", tags = { "Sliding Window" } },
+            { title_slug = "longest-substring-without-repeating-characters", tags = { "Sliding Window" } },
+            { title_slug = "longest-repeating-character-replacement", tags = { "Sliding Window" } },
+            { title_slug = "permutation-in-string", tags = { "Sliding Window" } },
+            { title_slug = "minimum-window-substring", tags = { "Sliding Window" } },
+            { title_slug = "sliding-window-maximum", tags = { "Sliding Window" } },
+
+            -- Stack
+            { title_slug = "valid-parentheses", tags = { "Stack" } },
+            { title_slug = "min-stack", tags = { "Stack" } },
+            { title_slug = "evaluate-reverse-polish-notation", tags = { "Stack" } },
+            { title_slug = "generate-parentheses", tags = { "Stack" } },
+            { title_slug = "daily-temperatures", tags = { "Stack" } },
+            { title_slug = "car-fleet", tags = { "Stack" } },
+            { title_slug = "largest-rectangle-in-histogram", tags = { "Stack" } },
+
+            -- Binary Search
+            { title_slug = "binary-search", tags = { "Binary Search" } },
+            { title_slug = "search-a-2d-matrix", tags = { "Binary Search" } },
+            { title_slug = "koko-eating-bananas", tags = { "Binary Search" } },
+            { title_slug = "find-minimum-in-rotated-sorted-array", tags = { "Binary Search" } },
+            { title_slug = "search-in-rotated-sorted-array", tags = { "Binary Search" } },
+            { title_slug = "time-based-key-value-store", tags = { "Binary Search" } },
+            { title_slug = "median-of-two-sorted-arrays", tags = { "Binary Search" } },
+
+            -- Linked List
+            { title_slug = "reverse-linked-list", tags = { "Linked List" } },
+            { title_slug = "merge-two-sorted-lists", tags = { "Linked List" } },
+            { title_slug = "reorder-list", tags = { "Linked List" } },
+            { title_slug = "remove-nth-node-from-end-of-list", tags = { "Linked List" } },
+            { title_slug = "copy-list-with-random-pointer", tags = { "Linked List" } },
+            { title_slug = "add-two-numbers", tags = { "Linked List" } },
+            { title_slug = "linked-list-cycle", tags = { "Linked List" } },
+            { title_slug = "find-the-duplicate-number", tags = { "Linked List" } },
+            { title_slug = "lru-cache", tags = { "Linked List" } },
+            { title_slug = "merge-k-sorted-lists", tags = { "Linked List" } },
+            { title_slug = "reverse-nodes-in-k-group", tags = { "Linked List" } },
+
+            -- Trees
+            { title_slug = "invert-binary-tree", tags = { "Trees" } },
+            { title_slug = "maximum-depth-of-binary-tree", tags = { "Trees" } },
+            { title_slug = "diameter-of-binary-tree", tags = { "Trees" } },
+            { title_slug = "balanced-binary-tree", tags = { "Trees" } },
+            { title_slug = "same-tree", tags = { "Trees" } },
+            { title_slug = "subtree-of-another-tree", tags = { "Trees" } },
+            { title_slug = "lowest-common-ancestor-of-a-binary-search-tree", tags = { "Trees" } },
+            { title_slug = "binary-tree-level-order-traversal", tags = { "Trees" } },
+            { title_slug = "binary-tree-right-side-view", tags = { "Trees" } },
+            { title_slug = "count-good-nodes-in-binary-tree", tags = { "Trees" } },
+            { title_slug = "validate-binary-search-tree", tags = { "Trees" } },
+            { title_slug = "kth-smallest-element-in-a-bst", tags = { "Trees" } },
+            { title_slug = "construct-binary-tree-from-preorder-and-inorder-traversal", tags = { "Trees" } },
+            { title_slug = "binary-tree-maximum-path-sum", tags = { "Trees" } },
+            { title_slug = "serialize-and-deserialize-binary-tree", tags = { "Trees" } },
+
+            -- Tries
+            { title_slug = "implement-trie-prefix-tree", tags = { "Tries" } },
+            { title_slug = "design-add-and-search-words-data-structure", tags = { "Tries" } },
+            { title_slug = "word-search-ii", tags = { "Tries" } },
+
+            -- Heap / Priority Queue
+            { title_slug = "kth-largest-element-in-a-stream", tags = { "Heap / Priority Queue" } },
+            { title_slug = "last-stone-weight", tags = { "Heap / Priority Queue" } },
+            { title_slug = "k-closest-points-to-origin", tags = { "Heap / Priority Queue" } },
+            { title_slug = "kth-largest-element-in-an-array", tags = { "Heap / Priority Queue" } },
+            { title_slug = "task-scheduler", tags = { "Heap / Priority Queue" } },
+            { title_slug = "design-twitter", tags = { "Heap / Priority Queue" } },
+            { title_slug = "find-median-from-data-stream", tags = { "Heap / Priority Queue" } },
+
+            -- Backtracking
+            { title_slug = "subsets", tags = { "Backtracking" } },
+            { title_slug = "combination-sum", tags = { "Backtracking" } },
+            { title_slug = "permutations", tags = { "Backtracking" } },
+            { title_slug = "subsets-ii", tags = { "Backtracking" } },
+            { title_slug = "combination-sum-ii", tags = { "Backtracking" } },
+            { title_slug = "word-search", tags = { "Backtracking" } },
+            { title_slug = "palindrome-partitioning", tags = { "Backtracking" } },
+            { title_slug = "letter-combinations-of-a-phone-number", tags = { "Backtracking" } },
+            { title_slug = "n-queens", tags = { "Backtracking" } },
+
+            -- Graphs
+            { title_slug = "number-of-islands", tags = { "Graphs" } },
+            { title_slug = "clone-graph", tags = { "Graphs" } },
+            { title_slug = "max-area-of-island", tags = { "Graphs" } },
+            { title_slug = "pacific-atlantic-water-flow", tags = { "Graphs" } },
+            { title_slug = "surrounded-regions", tags = { "Graphs" } },
+            { title_slug = "rotting-oranges", tags = { "Graphs" } },
+            { title_slug = "walls-and-gates", tags = { "Graphs" } },
+            { title_slug = "course-schedule", tags = { "Graphs" } },
+            { title_slug = "course-schedule-ii", tags = { "Graphs" } },
+            { title_slug = "redundant-connection", tags = { "Graphs" } },
+            { title_slug = "number-of-connected-components-in-an-undirected-graph", tags = { "Graphs" } },
+            { title_slug = "graph-valid-tree", tags = { "Graphs" } },
+
+            -- Advanced Graphs
+            { title_slug = "reconstruct-itinerary", tags = { "Advanced Graphs" } },
+            { title_slug = "min-cost-to-connect-all-points", tags = { "Advanced Graphs" } },
+            { title_slug = "network-delay-time", tags = { "Advanced Graphs" } },
+            { title_slug = "swim-in-rising-water", tags = { "Advanced Graphs" } },
+            { title_slug = "alien-dictionary", tags = { "Advanced Graphs" } },
+            { title_slug = "cheapest-flights-within-k-stops", tags = { "Advanced Graphs" } },
+
+            -- 1-D Dynamic Programming
+            { title_slug = "climbing-stairs", tags = { "1-D DP" } },
+            { title_slug = "min-cost-climbing-stairs", tags = { "1-D DP" } },
+            { title_slug = "house-robber", tags = { "1-D DP" } },
+            { title_slug = "house-robber-ii", tags = { "1-D DP" } },
+            { title_slug = "longest-palindromic-substring", tags = { "1-D DP" } },
+            { title_slug = "palindromic-substrings", tags = { "1-D DP" } },
+            { title_slug = "decode-ways", tags = { "1-D DP" } },
+            { title_slug = "coin-change", tags = { "1-D DP" } },
+            { title_slug = "maximum-product-subarray", tags = { "1-D DP" } },
+            { title_slug = "word-break", tags = { "1-D DP" } },
+            { title_slug = "longest-increasing-subsequence", tags = { "1-D DP" } },
+            { title_slug = "partition-equal-subset-sum", tags = { "1-D DP" } },
+
+            -- 2-D Dynamic Programming
+            { title_slug = "unique-paths", tags = { "2-D DP" } },
+            { title_slug = "longest-common-subsequence", tags = { "2-D DP" } },
+            { title_slug = "best-time-to-buy-and-sell-stock-with-cooldown", tags = { "2-D DP" } },
+            { title_slug = "coin-change-ii", tags = { "2-D DP" } },
+            { title_slug = "target-sum", tags = { "2-D DP" } },
+            { title_slug = "interleaving-string", tags = { "2-D DP" } },
+            { title_slug = "longest-increasing-path-in-a-matrix", tags = { "2-D DP" } },
+            { title_slug = "distinct-subsequences", tags = { "2-D DP" } },
+            { title_slug = "edit-distance", tags = { "2-D DP" } },
+            { title_slug = "burst-balloons", tags = { "2-D DP" } },
+            { title_slug = "regular-expression-matching", tags = { "2-D DP" } },
+
+            -- Greedy
+            { title_slug = "maximum-subarray", tags = { "Greedy" } },
+            { title_slug = "jump-game", tags = { "Greedy" } },
+            { title_slug = "jump-game-ii", tags = { "Greedy" } },
+            { title_slug = "gas-station", tags = { "Greedy" } },
+            { title_slug = "hand-of-straights", tags = { "Greedy" } },
+            { title_slug = "merge-triplets-to-form-target-triplet", tags = { "Greedy" } },
+            { title_slug = "partition-labels", tags = { "Greedy" } },
+            { title_slug = "valid-parenthesis-string", tags = { "Greedy" } },
+
+            -- Intervals
+            { title_slug = "insert-interval", tags = { "Intervals" } },
+            { title_slug = "merge-intervals", tags = { "Intervals" } },
+            { title_slug = "non-overlapping-intervals", tags = { "Intervals" } },
+            { title_slug = "meeting-rooms", tags = { "Intervals" } },
+            { title_slug = "meeting-rooms-ii", tags = { "Intervals" } },
+            { title_slug = "minimum-interval-to-include-each-query", tags = { "Intervals" } },
+
+            -- Math & Geometry
+            { title_slug = "rotate-image", tags = { "Math & Geometry" } },
+            { title_slug = "spiral-matrix", tags = { "Math & Geometry" } },
+            { title_slug = "set-matrix-zeroes", tags = { "Math & Geometry" } },
+            { title_slug = "happy-number", tags = { "Math & Geometry" } },
+            { title_slug = "plus-one", tags = { "Math & Geometry" } },
+            { title_slug = "powx-n", tags = { "Math & Geometry" } },
+            { title_slug = "multiply-strings", tags = { "Math & Geometry" } },
+            { title_slug = "detect-squares", tags = { "Math & Geometry" } },
+
+            -- Bit Manipulation
+            { title_slug = "single-number", tags = { "Bit Manipulation" } },
+            { title_slug = "number-of-1-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "counting-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "reverse-bits", tags = { "Bit Manipulation" } },
+            { title_slug = "missing-number", tags = { "Bit Manipulation" } },
+            { title_slug = "sum-of-two-integers", tags = { "Bit Manipulation" } },
+            { title_slug = "reverse-integer", tags = { "Bit Manipulation" } },
+        },
+    },
+}
+
+---Get all available list keys
+---@return string[]
+function M.get_list_keys()
+    return vim.tbl_keys(M.lists)
+end
+
+---Get a specific list by key
+---@param key string
+---@return lc.ProblemList|nil
+function M.get_list(key)
+    return M.lists[key]
+end
+
+---Get all unique tags from a list
+---@param list_key string
+---@return string[]
+function M.get_tags(list_key)
+    local list = M.lists[list_key]
+    if not list then
+        return {}
+    end
+
+    local tags_set = {}
+    for _, problem in ipairs(list.problems) do
+        for _, tag in ipairs(problem.tags) do
+            tags_set[tag] = true
+        end
+    end
+
+    local tags = vim.tbl_keys(tags_set)
+    table.sort(tags)
+    return tags
+end
+
+---Get problems from a list filtered by tag
+---@param list_key string
+---@param tag string
+---@return lc.ProblemListEntry[]
+function M.get_problems_by_tag(list_key, tag)
+    local list = M.lists[list_key]
+    if not list then
+        return {}
+    end
+
+    return vim.tbl_filter(function(problem)
+        return vim.tbl_contains(problem.tags, tag)
+    end, list.problems)
+end
+
+---Get all problems from a list
+---@param list_key string
+---@return lc.ProblemListEntry[]
+function M.get_all_problems(list_key)
+    local list = M.lists[list_key]
+    if not list then
+        return {}
+    end
+    return list.problems
+end
+
+return M

@@ -30,6 +30,13 @@ function cmd.problems(options)
     picker.question(p, options)
 end
 
+function cmd.problem_lists()
+    require("leetcode.utils").auth_guard()
+
+    local picker = require("leetcode.picker")
+    picker.problem_list()
+end
+
 ---@param cb? function
 function cmd.cookie_prompt(cb)
     local cookie = require("leetcode.cache.cookie")
@@ -634,6 +641,7 @@ cmd.commands = {
         cmd.problems,
         _args = arguments.list,
     },
+    lists = { cmd.problem_lists },
     random = {
         cmd.random_question,
         _args = arguments.random,
