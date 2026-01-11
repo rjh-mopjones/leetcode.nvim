@@ -32,11 +32,12 @@ local tag_displayer = entry_display.create({
 local problem_displayer = entry_display.create({
     separator = " ",
     items = {
-        { width = 1 },
-        { width = 1 },
-        { width = 5 },
-        { remaining = true },
-        { remaining = true },
+        { width = 1 },  -- offline indicator
+        { width = 1 },  -- status
+        { width = 1 },  -- difficulty
+        { width = 5 },  -- problem number
+        { remaining = true },  -- title
+        { remaining = true },  -- ac rate
     },
 })
 

@@ -5,6 +5,7 @@ local ui_utils = require("leetcode-ui.utils")
 local utils = require("leetcode.utils")
 local problem_lists = require("leetcode.problem-lists")
 local problemlist_cache = require("leetcode.cache.problemlist")
+local questions_cache = require("leetcode.cache.questions")
 local Question = require("leetcode-ui.question")
 local Picker = require("leetcode.picker")
 
@@ -26,6 +27,7 @@ P.tag_height = 0.4
 ---@field key string
 ---@field name string
 ---@field count integer
+---@field cached_count integer
 
 ---Build picker items for available lists
 ---@return { entry: any, value: leet.Picker.ListItem }[]
@@ -36,9 +38,23 @@ function P.lists_items()
     for _, key in ipairs(list_keys) do
         local list = problem_lists.get_list(key)
         if list then
+            -- Count cached problems
+            local cached_count = 0
+            for _, p in ipairs(list.problems) do
+                if questions_cache.is_cached(p.title_slug) then
+                    cached_count = cached_count + 1
+                end
+            end
+
+            local item_value = {
+                key = key,
+                name = list.name,
+                count = #list.problems,
+                cached_count = cached_count,
+            }
             table.insert(items, {
-                entry = P.lists_entry({ key = key, name = list.name, count = #list.problems }),
-                value = { key = key, name = list.name, count = #list.problems },
+                entry = P.lists_entry(item_value),
+                value = item_value,
             })
         end
     end
@@ -55,10 +71,14 @@ end
 ---@param item leet.Picker.ListItem
 ---@return table
 function P.lists_entry(item)
+    local cached_text = ""
+    if item.cached_count > 0 then
+        cached_text = (" [%d cached]"):format(item.cached_count)
+    end
     return {
         { "󰱔", "leetcode_alt" },
         { item.name },
-        { ("(%d problems)"):format(item.count), "leetcode_ref" },
+        { ("(%d problems)%s"):format(item.count, cached_text), "leetcode_ref" },
     }
 end
 
@@ -171,6 +191,7 @@ end
 ---@field title_slug string
 ---@field question lc.cache.Question|nil
 ---@field tags string[]
+---@field is_offline boolean
 
 ---Build picker items for problems in a list filtered by tag
 ---@param list_key string
@@ -187,10 +208,12 @@ function P.problems_items(list_key, tag)
 
     for _, problem in ipairs(problems) do
         local question = get_cached_question(problem.title_slug)
+        local is_offline = questions_cache.is_cached(problem.title_slug)
         local item = {
             title_slug = problem.title_slug,
             question = question,
             tags = problem.tags,
+            is_offline = is_offline,
         }
         table.insert(items, {
             entry = P.problems_entry(item),
@@ -201,11 +224,22 @@ function P.problems_items(list_key, tag)
     return items
 end
 
+---Display offline/cached indicator
+---@param is_offline boolean
+local function display_offline_status(is_offline)
+    if is_offline then
+        return { "󰅟", "leetcode_ok" }  -- cloud download icon
+    else
+        return { " " }
+    end
+end
+
 ---Format problem entry for display
 ---@param item leet.Picker.ProblemItem
 ---@return table
 function P.problems_entry(item)
     return {
+        display_offline_status(item.is_offline),
         display_user_status(item.question),
         display_difficulty(item.question),
         display_question(item.question, item.title_slug),

@@ -55,7 +55,7 @@ M.get = function()
         bold = { bold = true },
         underline = { underline = true },
 
-        code = { fg = hl("Type").fg, bg = hl("Normal").bg },
+        code = { fg = hl("Type").fg },
         example = { fg = hl("DiagnosticHint").fg },
         constraints = { fg = hl("DiagnosticInfo").fg },
         header = { fg = hl("SpecialChar").fg, bold = true },

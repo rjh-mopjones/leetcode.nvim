@@ -2,6 +2,7 @@ local utils = require("leetcode.api.utils")
 local log = require("leetcode.logger")
 local queries = require("leetcode.api.queries")
 local problemlist = require("leetcode.cache.problemlist")
+local questions_cache = require("leetcode.cache.questions")
 local urls = require("leetcode.api.urls")
 
 local question = {}
@@ -9,10 +10,10 @@ local question = {}
 ---@class lc.Question.Content
 ---@field content string
 
+---Fetch question from API (internal)
 ---@param title_slug string
----
----@return lc.question_res|nil
-function question.by_title_slug(title_slug)
+---@return lc.question_res|nil, table|nil
+local function fetch_from_api(title_slug)
     local variables = {
         titleSlug = title_slug,
     }
@@ -21,7 +22,7 @@ function question.by_title_slug(title_slug)
 
     local res, err = utils.query(query, variables)
     if not res or err then
-        return log.err(err)
+        return nil, err
     end
 
     local q = res.data.question
@@ -31,7 +32,55 @@ function question.by_title_slug(title_slug)
         q.similar = utils.normalize_similar_cn(q.similar)
     end
 
+    return q, nil
+end
+
+---@param title_slug string
+---@param use_cache? boolean Whether to check cache first (default: true)
+---
+---@return lc.question_res|nil
+function question.by_title_slug(title_slug, use_cache)
+    if use_cache ~= false then
+        local cached = questions_cache.get(title_slug)
+        if cached then
+            return cached
+        end
+    end
+
+    local q, err = fetch_from_api(title_slug)
+    if not q or err then
+        return log.err(err)
+    end
+
+    -- Cache the result for offline use
+    questions_cache.save(title_slug, q)
+
     return q
+end
+
+---Fetch and cache a question without opening it
+---@param title_slug string
+---@param callback? fun(success: boolean, err?: string)
+function question.cache_question(title_slug, callback)
+    local q, err = fetch_from_api(title_slug)
+    if not q or err then
+        if callback then
+            callback(false, err and err.msg or "Failed to fetch question")
+        end
+        return
+    end
+
+    local success = questions_cache.save(title_slug, q)
+    if callback then
+        callback(success, success and nil or "Failed to save to cache")
+    end
+end
+
+---Check if a question is cached for offline use
+---@param title_slug string
+---@return boolean
+function question.is_cached(title_slug)
+    return questions_cache.is_cached(title_slug)
 end
 
 ---@param filters? table
