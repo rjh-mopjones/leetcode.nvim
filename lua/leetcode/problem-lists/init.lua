@@ -314,6 +314,150 @@ M.lists = {
             { title_slug = "reverse-integer", tags = { "Bit Manipulation" } },
         },
     },
+
+    grind75 = {
+        name = "Grind 75",
+        problems = {
+            -- Week 1
+            { title_slug = "two-sum", tags = { "Week 1", "Array" } },
+            { title_slug = "valid-parentheses", tags = { "Week 1", "Stack" } },
+            { title_slug = "merge-two-sorted-lists", tags = { "Week 1", "Linked List" } },
+            { title_slug = "best-time-to-buy-and-sell-stock", tags = { "Week 1", "Array" } },
+            { title_slug = "valid-palindrome", tags = { "Week 1", "String" } },
+            { title_slug = "invert-binary-tree", tags = { "Week 1", "Tree" } },
+            { title_slug = "valid-anagram", tags = { "Week 1", "String" } },
+            { title_slug = "binary-search", tags = { "Week 1", "Binary Search" } },
+            { title_slug = "flood-fill", tags = { "Week 1", "Graph" } },
+            { title_slug = "lowest-common-ancestor-of-a-binary-search-tree", tags = { "Week 1", "Tree" } },
+            { title_slug = "balanced-binary-tree", tags = { "Week 1", "Tree" } },
+            { title_slug = "linked-list-cycle", tags = { "Week 1", "Linked List" } },
+            { title_slug = "implement-queue-using-stacks", tags = { "Week 1", "Stack" } },
+
+            -- Week 2
+            { title_slug = "first-bad-version", tags = { "Week 2", "Binary Search" } },
+            { title_slug = "ransom-note", tags = { "Week 2", "Hash Table" } },
+            { title_slug = "climbing-stairs", tags = { "Week 2", "Dynamic Programming" } },
+            { title_slug = "longest-palindrome", tags = { "Week 2", "String" } },
+            { title_slug = "reverse-linked-list", tags = { "Week 2", "Linked List" } },
+            { title_slug = "majority-element", tags = { "Week 2", "Array" } },
+            { title_slug = "add-binary", tags = { "Week 2", "String" } },
+            { title_slug = "diameter-of-binary-tree", tags = { "Week 2", "Tree" } },
+            { title_slug = "middle-of-the-linked-list", tags = { "Week 2", "Linked List" } },
+            { title_slug = "maximum-depth-of-binary-tree", tags = { "Week 2", "Tree" } },
+            { title_slug = "contains-duplicate", tags = { "Week 2", "Array" } },
+
+            -- Week 3
+            { title_slug = "maximum-subarray", tags = { "Week 3", "Dynamic Programming" } },
+            { title_slug = "insert-interval", tags = { "Week 3", "Array" } },
+            { title_slug = "01-matrix", tags = { "Week 3", "Graph" } },
+            { title_slug = "k-closest-points-to-origin", tags = { "Week 3", "Heap" } },
+            { title_slug = "longest-substring-without-repeating-characters", tags = { "Week 3", "String" } },
+            { title_slug = "3sum", tags = { "Week 3", "Array" } },
+            { title_slug = "binary-tree-level-order-traversal", tags = { "Week 3", "Tree" } },
+            { title_slug = "clone-graph", tags = { "Week 3", "Graph" } },
+            { title_slug = "evaluate-reverse-polish-notation", tags = { "Week 3", "Stack" } },
+
+            -- Week 4
+            { title_slug = "course-schedule", tags = { "Week 4", "Graph" } },
+            { title_slug = "implement-trie-prefix-tree", tags = { "Week 4", "Trie" } },
+            { title_slug = "coin-change", tags = { "Week 4", "Dynamic Programming" } },
+            { title_slug = "product-of-array-except-self", tags = { "Week 4", "Array" } },
+            { title_slug = "min-stack", tags = { "Week 4", "Stack" } },
+            { title_slug = "validate-binary-search-tree", tags = { "Week 4", "Tree" } },
+            { title_slug = "number-of-islands", tags = { "Week 4", "Graph" } },
+            { title_slug = "rotting-oranges", tags = { "Week 4", "Graph" } },
+
+            -- Week 5
+            { title_slug = "search-in-rotated-sorted-array", tags = { "Week 5", "Binary Search" } },
+            { title_slug = "combination-sum", tags = { "Week 5", "Backtracking" } },
+            { title_slug = "permutations", tags = { "Week 5", "Backtracking" } },
+            { title_slug = "merge-intervals", tags = { "Week 5", "Array" } },
+            { title_slug = "lowest-common-ancestor-of-a-binary-tree", tags = { "Week 5", "Tree" } },
+            { title_slug = "time-based-key-value-store", tags = { "Week 5", "Binary Search" } },
+            { title_slug = "accounts-merge", tags = { "Week 5", "Graph" } },
+            { title_slug = "sort-colors", tags = { "Week 5", "Array" } },
+
+            -- Week 6
+            { title_slug = "word-break", tags = { "Week 6", "Dynamic Programming" } },
+            { title_slug = "partition-equal-subset-sum", tags = { "Week 6", "Dynamic Programming" } },
+            { title_slug = "string-to-integer-atoi", tags = { "Week 6", "String" } },
+            { title_slug = "spiral-matrix", tags = { "Week 6", "Matrix" } },
+            { title_slug = "subsets", tags = { "Week 6", "Backtracking" } },
+            { title_slug = "binary-tree-right-side-view", tags = { "Week 6", "Tree" } },
+            { title_slug = "longest-palindromic-substring", tags = { "Week 6", "String" } },
+            { title_slug = "unique-paths", tags = { "Week 6", "Dynamic Programming" } },
+            { title_slug = "construct-binary-tree-from-preorder-and-inorder-traversal", tags = { "Week 6", "Tree" } },
+
+            -- Week 7
+            { title_slug = "container-with-most-water", tags = { "Week 7", "Array" } },
+            { title_slug = "letter-combinations-of-a-phone-number", tags = { "Week 7", "Backtracking" } },
+            { title_slug = "word-search", tags = { "Week 7", "Backtracking" } },
+            { title_slug = "find-all-anagrams-in-a-string", tags = { "Week 7", "String" } },
+            { title_slug = "minimum-height-trees", tags = { "Week 7", "Graph" } },
+            { title_slug = "task-scheduler", tags = { "Week 7", "Heap" } },
+            { title_slug = "lru-cache", tags = { "Week 7", "Design" } },
+
+            -- Week 8
+            { title_slug = "kth-smallest-element-in-a-bst", tags = { "Week 8", "Tree" } },
+            { title_slug = "minimum-window-substring", tags = { "Week 8", "String" } },
+            { title_slug = "serialize-and-deserialize-binary-tree", tags = { "Week 8", "Tree" } },
+            { title_slug = "trapping-rain-water", tags = { "Week 8", "Array" } },
+            { title_slug = "find-median-from-data-stream", tags = { "Week 8", "Heap" } },
+            { title_slug = "word-ladder", tags = { "Week 8", "Graph" } },
+            { title_slug = "basic-calculator", tags = { "Week 8", "Stack" } },
+            { title_slug = "maximum-profit-in-job-scheduling", tags = { "Week 8", "Dynamic Programming" } },
+            { title_slug = "merge-k-sorted-lists", tags = { "Week 8", "Linked List" } },
+            { title_slug = "largest-rectangle-in-histogram", tags = { "Week 8", "Stack" } },
+        },
+    },
+
+    design = {
+        name = "Design",
+        problems = {
+            -- Easy
+            { title_slug = "design-hashset", tags = { "Easy", "Hash Table" } },
+            { title_slug = "design-hashmap", tags = { "Easy", "Hash Table" } },
+            { title_slug = "design-parking-system", tags = { "Easy", "Design" } },
+            { title_slug = "implement-stack-using-queues", tags = { "Easy", "Stack" } },
+            { title_slug = "implement-queue-using-stacks", tags = { "Easy", "Queue" } },
+            { title_slug = "kth-largest-element-in-a-stream", tags = { "Easy", "Heap" } },
+
+            -- Medium
+            { title_slug = "min-stack", tags = { "Medium", "Stack" } },
+            { title_slug = "implement-trie-prefix-tree", tags = { "Medium", "Trie" } },
+            { title_slug = "design-add-and-search-words-data-structure", tags = { "Medium", "Trie" } },
+            { title_slug = "lru-cache", tags = { "Medium", "Linked List" } },
+            { title_slug = "design-twitter", tags = { "Medium", "Heap" } },
+            { title_slug = "insert-delete-getrandom-o1", tags = { "Medium", "Hash Table" } },
+            { title_slug = "design-circular-queue", tags = { "Medium", "Queue" } },
+            { title_slug = "design-circular-deque", tags = { "Medium", "Queue" } },
+            { title_slug = "design-linked-list", tags = { "Medium", "Linked List" } },
+            { title_slug = "design-browser-history", tags = { "Medium", "Design" } },
+            { title_slug = "design-underground-system", tags = { "Medium", "Design" } },
+            { title_slug = "snapshot-array", tags = { "Medium", "Design" } },
+            { title_slug = "online-stock-span", tags = { "Medium", "Stack" } },
+            { title_slug = "time-based-key-value-store", tags = { "Medium", "Binary Search" } },
+            { title_slug = "binary-search-tree-iterator", tags = { "Medium", "Tree" } },
+            { title_slug = "peeking-iterator", tags = { "Medium", "Iterator" } },
+            { title_slug = "flatten-nested-list-iterator", tags = { "Medium", "Iterator" } },
+            { title_slug = "serialize-and-deserialize-bst", tags = { "Medium", "Tree" } },
+            { title_slug = "design-hit-counter", tags = { "Medium", "Design" } },
+            { title_slug = "logger-rate-limiter", tags = { "Medium", "Design" } },
+            { title_slug = "design-tic-tac-toe", tags = { "Medium", "Design" } },
+            { title_slug = "encode-and-decode-tinyurl", tags = { "Medium", "Design" } },
+            { title_slug = "design-front-middle-back-queue", tags = { "Medium", "Queue" } },
+
+            -- Hard
+            { title_slug = "lfu-cache", tags = { "Hard", "Linked List" } },
+            { title_slug = "all-oone-data-structure", tags = { "Hard", "Design" } },
+            { title_slug = "serialize-and-deserialize-binary-tree", tags = { "Hard", "Tree" } },
+            { title_slug = "find-median-from-data-stream", tags = { "Hard", "Heap" } },
+            { title_slug = "design-in-memory-file-system", tags = { "Hard", "Trie" } },
+            { title_slug = "design-search-autocomplete-system", tags = { "Hard", "Trie" } },
+            { title_slug = "maximum-frequency-stack", tags = { "Hard", "Stack" } },
+            { title_slug = "design-skiplist", tags = { "Hard", "Design" } },
+        },
+    },
 }
 
 ---Get all available list keys
