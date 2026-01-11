@@ -19,7 +19,7 @@ local function format_entry(item)
 end
 
 -- Show problems picker for a specific list and tag
-local function show_problems_picker(list_key, tag)
+local function show_problems_picker(list_key, list_name, tag)
     local items = problem_list_picker.problems_items(list_key, tag)
     local finder_items = {}
     local completed = false
@@ -35,7 +35,7 @@ local function show_problems_picker(list_key, tag)
     picker.pick({
         items = finder_items,
         format = format_entry,
-        title = t("Select a Problem") .. " - " .. tag,
+        title = t("Select a Problem") .. " - " .. list_name .. " - " .. tag,
         layout = {
             preset = "select",
             preview = false,
@@ -99,7 +99,7 @@ local function show_tags_picker(list_key, list_name)
                 completed = true
                 p:close()
                 vim.schedule(function()
-                    show_problems_picker(list_key, item.item.value.tag)
+                    show_problems_picker(list_key, list_name, item.item.value.tag)
                 end)
             end,
         },

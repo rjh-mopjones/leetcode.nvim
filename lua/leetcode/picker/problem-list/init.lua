@@ -78,7 +78,14 @@ end
 ---@return { entry: any, value: leet.Picker.TagItem }[]
 function P.tags_items(list_key)
     local tags = problem_lists.get_tags(list_key)
+    local all_problems = problem_lists.get_all_problems(list_key)
     local items = {}
+
+    -- Add "All" option first
+    table.insert(items, {
+        entry = P.tags_entry({ tag = "All", count = #all_problems }),
+        value = { tag = "All", count = #all_problems },
+    })
 
     for _, tag in ipairs(tags) do
         local problems = problem_lists.get_problems_by_tag(list_key, tag)
@@ -95,8 +102,9 @@ end
 ---@param item leet.Picker.TagItem
 ---@return table
 function P.tags_entry(item)
+    local icon = item.tag == "All" and "󰀘" or ""
     return {
-        { "", "leetcode_alt" },
+        { icon, "leetcode_alt" },
         { item.tag },
         { ("(%d)"):format(item.count), "leetcode_ref" },
     }
@@ -169,7 +177,12 @@ end
 ---@param tag string
 ---@return { entry: any, value: leet.Picker.ProblemItem }[]
 function P.problems_items(list_key, tag)
-    local problems = problem_lists.get_problems_by_tag(list_key, tag)
+    local problems
+    if tag == "All" then
+        problems = problem_lists.get_all_problems(list_key)
+    else
+        problems = problem_lists.get_problems_by_tag(list_key, tag)
+    end
     local items = {}
 
     for _, problem in ipairs(problems) do

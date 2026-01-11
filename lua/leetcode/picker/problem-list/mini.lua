@@ -6,7 +6,7 @@ local picker = require("mini.pick")
 local mini_pick_utils = require("leetcode.picker.mini_pick_utils")
 
 -- Show problems picker for a specific list and tag
-local function show_problems_picker(list_key, tag)
+local function show_problems_picker(list_key, list_name, tag)
     local items = problem_list_picker.problems_items(list_key, tag)
     local ns_id = vim.api.nvim_create_namespace("MiniPick LeetCode ProblemList Problems Picker")
     local finder_items = {}
@@ -24,7 +24,7 @@ local function show_problems_picker(list_key, tag)
     local res = picker.start({
         source = {
             items = finder_items,
-            name = t("Select a Problem") .. " - " .. tag,
+            name = t("Select a Problem") .. " - " .. list_name .. " - " .. tag,
             choose = function(item)
                 if completed then
                     return
@@ -80,7 +80,7 @@ local function show_tags_picker(list_key, list_name)
                 end
                 completed = true
                 vim.schedule(function()
-                    show_problems_picker(list_key, item.item.value.tag)
+                    show_problems_picker(list_key, list_name, item.item.value.tag)
                 end)
             end,
             show = function(buf_id, items_to_show)

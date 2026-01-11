@@ -6,7 +6,7 @@ local Picker = require("leetcode.picker")
 local deli = " "
 
 -- Show problems picker for a specific list and tag
-local function show_problems_picker(list_key, tag)
+local function show_problems_picker(list_key, list_name, tag)
     local items = problem_list_picker.problems_items(list_key, tag)
     local fzf_items = {}
 
@@ -17,7 +17,7 @@ local function show_problems_picker(list_key, tag)
     end
 
     fzf.fzf_exec(fzf_items, {
-        prompt = t("Select a Problem") .. " - " .. tag .. "> ",
+        prompt = t("Select a Problem") .. " - " .. list_name .. " - " .. tag .. "> ",
         winopts = {
             height = problem_list_picker.height,
             width = problem_list_picker.width,
@@ -66,7 +66,7 @@ local function show_tags_picker(list_key, list_name)
             ["default"] = function(selected)
                 local tag = Picker.hidden_field(selected[1], deli)
                 vim.schedule(function()
-                    show_problems_picker(list_key, tag)
+                    show_problems_picker(list_key, list_name, tag)
                 end)
             end,
         },

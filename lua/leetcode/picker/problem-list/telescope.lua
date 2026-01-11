@@ -92,12 +92,12 @@ local problem_theme = require("telescope.themes").get_dropdown({
 })
 
 -- Show problems picker for a specific list and tag
-local function show_problems_picker(list_key, tag)
+local function show_problems_picker(list_key, list_name, tag)
     local items = problem_list_picker.problems_items(list_key, tag)
 
     pickers
         .new(problem_theme, {
-            prompt_title = t("Select a Problem") .. " - " .. tag,
+            prompt_title = t("Select a Problem") .. " - " .. list_name .. " - " .. tag,
             finder = finders.new_table({
                 results = items,
                 entry_maker = problem_entry_maker,
@@ -139,7 +139,7 @@ local function show_tags_picker(list_key, list_name)
                     end
                     actions.close(prompt_bufnr)
                     vim.schedule(function()
-                        show_problems_picker(list_key, selection.value.tag)
+                        show_problems_picker(list_key, list_name, selection.value.tag)
                     end)
                 end)
                 return true
