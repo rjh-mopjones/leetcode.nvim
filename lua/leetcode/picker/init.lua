@@ -135,7 +135,7 @@ function P.tabs()
 end
 
 function P.problem_list(...)
-    P.pick("problem-list", ...)
+    require("leetcode.picker.problem-list.menu")(...)
 end
 
 function P.hidden_field(text, deli)
