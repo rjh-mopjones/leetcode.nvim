@@ -519,6 +519,34 @@ function cmd.fold()
     q:editor_fold_imports(true)
 end
 
+---Generate local test code and append to the current file
+function cmd.local_test()
+    local utils = require("leetcode.utils")
+    local q = utils.curr_question()
+    if not q then
+        return
+    end
+
+    local local_test = require("leetcode.runner.local_test")
+    local code, err = local_test.generate(q)
+
+    if err then
+        return log.error(err)
+    end
+
+    if not code then
+        return log.error("Failed to generate local test code")
+    end
+
+    -- Append to the end of the buffer
+    if q.bufnr and api.nvim_buf_is_valid(q.bufnr) then
+        local lines = vim.split(code, "\n")
+        local line_count = api.nvim_buf_line_count(q.bufnr)
+        api.nvim_buf_set_lines(q.bufnr, line_count, line_count, false, lines)
+        log.info("Local test code added. Run with your language interpreter.")
+    end
+end
+
 function cmd.get_active_session()
     local sessions = config.sessions.all
     return vim.tbl_filter(function(s)
@@ -714,7 +742,10 @@ cmd.commands = {
     tabs = { cmd.question_tabs },
     lang = { cmd.change_lang },
     run = { cmd.q_run },
-    test = { cmd.q_run },
+    test = {
+        cmd.q_run,
+        ["local"] = { cmd.local_test },
+    },
     submit = { cmd.q_submit },
     daily = { cmd.qot },
     yank = { cmd.yank },
