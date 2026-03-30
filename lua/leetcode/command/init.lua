@@ -30,6 +30,111 @@ function cmd.problems(options)
     picker.question(p, options)
 end
 
+function cmd.problem_lists()
+    require("leetcode.utils").auth_guard()
+
+    local picker = require("leetcode.picker")
+    picker.problem_list()
+end
+
+---Download all problems in a problem list for offline use
+---@param opts? { list?: string }
+function cmd.download_list(opts)
+    require("leetcode.utils").auth_guard()
+
+    local problem_lists = require("leetcode.problem-lists")
+    local question_api = require("leetcode.api.question")
+
+    local function download_list(list_key)
+        local list = problem_lists.get_list(list_key)
+        if not list then
+            return log.error("Problem list not found: " .. list_key)
+        end
+
+        local problems = list.problems
+        local total = #problems
+        local completed = 0
+        local failed = 0
+        local skipped = 0
+
+        log.info(("Downloading %d problems from %s for offline use..."):format(total, list.name))
+
+        for _, problem in ipairs(problems) do
+            -- Check if already cached
+            if question_api.is_cached(problem.title_slug) then
+                skipped = skipped + 1
+                completed = completed + 1
+            else
+                -- Small delay to avoid rate limiting
+                vim.wait(100)
+
+                question_api.cache_question(problem.title_slug, function(success, err)
+                    if success then
+                        completed = completed + 1
+                    else
+                        failed = failed + 1
+                        completed = completed + 1
+                        log.warn(("Failed to cache %s: %s"):format(problem.title_slug, err or "unknown error"))
+                    end
+                end)
+
+                -- Wait for completion
+                vim.wait(1000, function()
+                    return completed >= total
+                end, 50)
+            end
+
+            -- Progress update every 10 problems
+            if completed % 10 == 0 then
+                log.info(("Progress: %d/%d (skipped: %d, failed: %d)"):format(completed, total, skipped, failed))
+            end
+        end
+
+        log.info(("Download complete! %d/%d problems cached (skipped: %d, failed: %d)"):format(
+            total - failed,
+            total,
+            skipped,
+            failed
+        ))
+    end
+
+    -- If list specified in opts, download it directly
+    if opts and opts.list and opts.list[1] then
+        download_list(opts.list[1])
+        return
+    end
+
+    -- Otherwise show picker to select a list
+    local list_keys = problem_lists.get_list_keys()
+    local items = {}
+    for _, key in ipairs(list_keys) do
+        local list = problem_lists.get_list(key)
+        if list then
+            table.insert(items, { key = key, name = list.name, count = #list.problems })
+        end
+    end
+
+    vim.ui.select(items, {
+        prompt = "Select a problem list to download:",
+        format_item = function(item)
+            local cached_count = 0
+            local list = problem_lists.get_list(item.key)
+            if list then
+                for _, p in ipairs(list.problems) do
+                    if question_api.is_cached(p.title_slug) then
+                        cached_count = cached_count + 1
+                    end
+                end
+            end
+            return ("%s (%d problems, %d cached)"):format(item.name, item.count, cached_count)
+        end,
+    }, function(choice)
+        if choice then
+            download_list(choice.key)
+        end
+    end)
+end
+
 ---@param cb? function
 function cmd.cookie_prompt(cb)
     local cookie = require("leetcode.cache.cookie")
@@ -414,6 +519,34 @@ function cmd.fold()
     q:editor_fold_imports(true)
 end
 
+---Generate local test code and append to the current file
+function cmd.local_test()
+    local utils = require("leetcode.utils")
+    local q = utils.curr_question()
+    if not q then
+        return
+    end
+
+    local local_test = require("leetcode.runner.local_test")
+    local code, err = local_test.generate(q)
+
+    if err then
+        return log.error(err)
+    end
+
+    if not code then
+        return log.error("Failed to generate local test code")
+    end
+
+    -- Append to the end of the buffer
+    if q.bufnr and api.nvim_buf_is_valid(q.bufnr) then
+        local lines = vim.split(code, "\n")
+        local line_count = api.nvim_buf_line_count(q.bufnr)
+        api.nvim_buf_set_lines(q.bufnr, line_count, line_count, false, lines)
+        log.info("Local test code added. Run with your language interpreter.")
+    end
+end
+
 function cmd.get_active_session()
     local sessions = config.sessions.all
     return vim.tbl_filter(function(s)
@@ -609,7 +742,10 @@ cmd.commands = {
     tabs = { cmd.question_tabs },
     lang = { cmd.change_lang },
     run = { cmd.q_run },
-    test = { cmd.q_run },
+    test = {
+        cmd.q_run,
+        ["local"] = { cmd.local_test },
+    },
     submit = { cmd.q_submit },
     daily = { cmd.qot },
     yank = { cmd.yank },
@@ -634,6 +770,8 @@ cmd.commands = {
         cmd.problems,
         _args = arguments.list,
     },
+    lists = { cmd.problem_lists },
+    download = { cmd.download_list },
     random = {
         cmd.random_question,
         _args = arguments.random,
